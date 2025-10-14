@@ -30,6 +30,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             <a href="#services" onClick={(e) => handleLinkClick(e, '#services')} className="text-3xl font-semibold text-gray-800 hover:text-black">Services</a>
             <a href="#portfolio" onClick={(e) => handleLinkClick(e, '#portfolio')} className="text-3xl font-semibold text-gray-800 hover:text-black">Portfolio</a>
             <a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')} className="text-3xl font-semibold text-gray-800 hover:text-black">Contact</a>
+            <a 
+              href="https://drive.google.com/file/d/1Hntnvwi6f21meDcHI88QzRTHv_hEbHg9/view" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-3xl font-semibold text-gray-800 hover:text-black"
+            >
+              Resume
+            </a>
         </nav>
       </div>
     </div>

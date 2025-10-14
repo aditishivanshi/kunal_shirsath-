@@ -46,6 +46,14 @@ const Header: React.FC = () => {
             <NavLink href="#services">Services</NavLink>
             <NavLink href="#portfolio">Portfolio</NavLink>
             <NavLink href="#contact">Contact</NavLink>
+            <a 
+              href="https://drive.google.com/file/d/1Hntnvwi6f21meDcHI88QzRTHv_hEbHg9/view" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm font-normal tracking-wider text-gray-700 transition-colors duration-300 hover:text-black"
+            >
+              Resume
+            </a>
           </nav>
           <div className="md:hidden">
             <button onClick={handleMenuToggle} aria-label="Open menu">
