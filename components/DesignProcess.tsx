@@ -6,25 +6,25 @@ const processSteps = [
         num: '01',
         title: 'Discovery & Research',
         description: 'I start by understanding your brand, audience, and goals to build a strong strategic foundation.',
-        imageUrl: 'https://picsum.photos/600/400?random=31'
+        imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop'
     },
     {
         num: '02',
         title: 'Concept & Strategy',
         description: 'Based on research, I develop initial concepts and mood boards to define a clear visual strategy.',
-        imageUrl: 'https://picsum.photos/600/400?random=32'
+        imageUrl: 'https://images.unsplash.com/photo-1532619187608-e5375cab36aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870'
     },
     {
         num: '03',
         title: 'Design & Execution',
         description: 'This is where the vision comes to life. I meticulously craft the design assets with pixel-perfect execution.',
-        imageUrl: 'https://picsum.photos/600/400?random=33'
+        imageUrl: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071&auto=format&fit=crop'
     },
     {
         num: '04',
         title: 'Feedback & Delivery',
         description: 'We review the designs together, I incorporate your feedback, and deliver all the final files.',
-        imageUrl: 'https://picsum.photos/600/400?random=34'
+        imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop'
     },
 ];
 
