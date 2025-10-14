@@ -38,8 +38,8 @@ const Header: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-6 py-5 flex justify-between items-center">
-          <a href="#home" className="font-semibold text-lg tracking-wider text-[#222]">
-            K.S.
+          <a href="#home" className="font-logo text-2xl font-bold text-[#222]">
+            Kunal Shirsath
           </a>
           <nav className="hidden md:flex items-center space-x-10">
             <NavLink href="#about">About</NavLink>
