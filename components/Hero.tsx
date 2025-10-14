@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
       </div>
       <div className="relative z-10 text-center px-4">
         <h1 className="text-5xl md:text-7xl font-semibold text-[#222] tracking-tight leading-tight mb-4">
-          I’m Kunal Shirsath<br className="hidden md:block" /> Graphic Designer.
+          I’m Kunal Shirsath<br className="hidden md:block" /> Graphic & UI Designer.
         </h1>
         <p className="max-w-xl mx-auto text-lg md:text-xl text-gray-600 font-normal tracking-wide">
           I design meaningful brand identities and digital experiences that connect design and purpose.
