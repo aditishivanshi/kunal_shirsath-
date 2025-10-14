@@ -19,6 +19,16 @@
       .font-logo {
         font-family: 'Instrument Serif', serif;
       }
+      @keyframes infinite-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      .animate-infinite-scroll {
+        animation: infinite-scroll 20s linear infinite;
+      }
+      .group:hover .animate-infinite-scroll {
+        animation-play-state: paused;
+      }
     </style>
   <script type="importmap">
 {

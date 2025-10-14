@@ -6,6 +6,7 @@ import Services from './components/Services';
 import FeaturedProjects from './components/FeaturedProjects';
 import Testimonials from './components/Testimonials';
 import DesignProcess from './components/DesignProcess';
+import InstagramFeed from './components/InstagramFeed';
 import Contact from './components/Contact';
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <DesignProcess />
         <FeaturedProjects />
         <Testimonials />
+        <InstagramFeed />
         <Contact />
       </main>
     </div>

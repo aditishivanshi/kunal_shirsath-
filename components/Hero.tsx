@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         className="absolute top-0 left-0 w-full h-[150%] bg-cover bg-center"
       >
         <div className="absolute inset-0 bg-gray-100 opacity-50"></div>
-         <img src="https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870" alt="Abstract background" className="w-full h-full object-cover opacity-30"/>
+         <img src="https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870" alt="Abstract background" className="w-full h-full object-cover opacity-40"/>
 
       </div>
       <div className="relative z-10 text-center px-4">
