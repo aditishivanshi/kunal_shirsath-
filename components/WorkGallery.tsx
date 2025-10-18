@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { CloseIcon, ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 const imageUrls = [
       'https://i.postimg.cc/FzRLHtmy/Frame-1618871295.png',
@@ -50,20 +51,34 @@ const imageUrls = [
  
 ];
 
-const GalleryImage: React.FC<{ src: string, index: number }> = ({ src, index }) => {
+const GalleryImage: React.FC<{ 
+  src: string; 
+  index: number; 
+  onClick: () => void;
+  isBlurred: boolean;
+  onMouseEnter: () => void;
+}> = ({ src, index, onClick, isBlurred, onMouseEnter }) => {
   const [ref, isVisible] = useScrollAnimation<HTMLDivElement>();
+
+  const containerClasses = [
+    'm-1', 'group', 'center', 'transition-all', 'duration-500', 
+    'ease-out', 'transform', 'cursor-pointer',
+    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0',
+    isBlurred ? 'filter blur-sm scale-95 opacity-60' : ''
+  ].join(' ');
 
   return (
     <div 
       ref={ref}
-      className={`m-1 group center transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 '}`}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      className={containerClasses}
       style={{ transitionDelay: `${(index % 2) * 100 + Math.floor(index / 2) * 50}ms` }}
     >
       <img
         src={src}
         alt={`Gallery image ${index + 1}`}
-        className="transition-transform duration-500 ease-in-out aspect-[4/5]"
-       
+        className="transition-transform duration-500 ease-in-out aspect-[4/5] group-hover:scale-105"
       />
     </div>
   );
@@ -71,13 +86,116 @@ const GalleryImage: React.FC<{ src: string, index: number }> = ({ src, index }) 
 
 
 const WorkGallery: React.FC = () => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleOpenModal = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImageIndex(null);
+  };
+
+  const handleShowNextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((prevIndex) => (prevIndex! + 1) % imageUrls.length);
+    }
+  };
+  
+  const handleShowPrevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((prevIndex) => (prevIndex! - 1 + imageUrls.length) % imageUrls.length);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImageIndex === null) return;
+      if (e.key === 'Escape') handleCloseModal();
+      if (e.key === 'ArrowRight') handleShowNextImage();
+      if (e.key === 'ArrowLeft') handleShowPrevImage();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    if (selectedImageIndex !== null) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedImageIndex]);
+
+
   return (
     <section className="bg-white">
-      <div className="grid m-2 md:m-16 grid-cols-2 md:grid-cols-3">
+      <div 
+        className="grid m-2 md:m-16 grid-cols-2 md:grid-cols-3"
+        onMouseLeave={() => setHoveredIndex(null)}
+      >
         {imageUrls.map((url, index) => (
-          <GalleryImage key={index} src={url} index={index} />
+          <GalleryImage 
+            key={index} 
+            src={url} 
+            index={index} 
+            onClick={() => handleOpenModal(index)}
+            isBlurred={hoveredIndex !== null && hoveredIndex !== index}
+            onMouseEnter={() => setHoveredIndex(index)}
+          />
         ))}
       </div>
+
+      {selectedImageIndex !== null && (
+        <div 
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 animate-fade-in"
+            onClick={handleCloseModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
+          <style>{`.animate-fade-in { animation: fadeIn 0.3s ease; } @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }`}</style>
+          
+          <button
+            onClick={handleCloseModal}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-[110]"
+            aria-label="Close image viewer"
+          >
+            <CloseIcon className="w-8 h-8" />
+          </button>
+
+          <button
+            onClick={handleShowPrevImage}
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors z-[110]"
+            aria-label="Previous image"
+          >
+            <ChevronLeftIcon className="w-8 h-8 sm:w-10 sm:h-10" />
+          </button>
+          
+          <button
+            onClick={handleShowNextImage}
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors z-[110]"
+            aria-label="Next image"
+          >
+            <ChevronRightIcon className="w-8 h-8 sm:w-10 sm:h-10" />
+          </button>
+
+          <div className="relative max-w-full max-h-full" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={imageUrls[selectedImageIndex]} 
+              alt={`Gallery image ${selectedImageIndex + 1}`}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            />
+            <h2 id="modal-title" className="sr-only">Image {selectedImageIndex + 1} of {imageUrls.length}</h2>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
